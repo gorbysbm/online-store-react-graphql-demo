@@ -1,6 +1,8 @@
+import Link from 'next/link';
+
 const Sell = props => (
   <div>
-    <p>Selling</p>
+    <p>Sell!</p>
   </div>
 );
 
