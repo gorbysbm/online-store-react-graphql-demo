@@ -1,5 +1,5 @@
-# source: https://eu1.prisma.sh/tony-lea/sickfitz/dev
-# timestamp: Wed Oct 17 2018 22:05:18 GMT+0100 (British Summer Time)
+# source: https://eu1.prisma.sh/tony-lea/sickfitzz/dev
+# timestamp: Sun Oct 21 2018 18:02:21 GMT+0100 (British Summer Time)
 
 type AggregateItem {
   count: Int!
@@ -21,7 +21,7 @@ type Item implements Node {
   title: String!
   description: String!
   image: String
-  largerImage: String
+  largeImage: String
   price: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -41,7 +41,7 @@ input ItemCreateInput {
   title: String!
   description: String!
   image: String
-  largerImage: String
+  largeImage: String
   price: Int!
 }
 
@@ -63,8 +63,8 @@ enum ItemOrderByInput {
   description_DESC
   image_ASC
   image_DESC
-  largerImage_ASC
-  largerImage_DESC
+  largeImage_ASC
+  largeImage_DESC
   price_ASC
   price_DESC
   createdAt_ASC
@@ -78,7 +78,7 @@ type ItemPreviousValues {
   title: String!
   description: String!
   image: String
-  largerImage: String
+  largeImage: String
   price: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -127,7 +127,7 @@ input ItemUpdateInput {
   title: String
   description: String
   image: String
-  largerImage: String
+  largeImage: String
   price: Int
 }
 
@@ -300,46 +300,46 @@ input ItemWhereInput {
 
   """All values not ending with the given string."""
   image_not_ends_with: String
-  largerImage: String
+  largeImage: String
 
   """All values that are not equal to given value."""
-  largerImage_not: String
+  largeImage_not: String
 
   """All values that are contained in given list."""
-  largerImage_in: [String!]
+  largeImage_in: [String!]
 
   """All values that are not contained in given list."""
-  largerImage_not_in: [String!]
+  largeImage_not_in: [String!]
 
   """All values less than the given value."""
-  largerImage_lt: String
+  largeImage_lt: String
 
   """All values less than or equal the given value."""
-  largerImage_lte: String
+  largeImage_lte: String
 
   """All values greater than the given value."""
-  largerImage_gt: String
+  largeImage_gt: String
 
   """All values greater than or equal the given value."""
-  largerImage_gte: String
+  largeImage_gte: String
 
   """All values containing the given string."""
-  largerImage_contains: String
+  largeImage_contains: String
 
   """All values not containing the given string."""
-  largerImage_not_contains: String
+  largeImage_not_contains: String
 
   """All values starting with the given string."""
-  largerImage_starts_with: String
+  largeImage_starts_with: String
 
   """All values not starting with the given string."""
-  largerImage_not_starts_with: String
+  largeImage_not_starts_with: String
 
   """All values ending with the given string."""
-  largerImage_ends_with: String
+  largeImage_ends_with: String
 
   """All values not ending with the given string."""
-  largerImage_not_ends_with: String
+  largeImage_not_ends_with: String
   price: Int
 
   """All values that are not equal to given value."""
