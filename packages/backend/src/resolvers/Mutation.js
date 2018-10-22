@@ -25,6 +25,15 @@ const Mutation = {
       info
     );
   },
+  async deleteItem(_, args, ctx, info) {
+    const where = { id: args.id };
+    // find item
+    const item = await ctx.db.query.item({ where }, `{ id title}`);
+    // check if they own item
+    // TODO
+    // delete
+    return ctx.db.mutation.deleteItem({ where }, info);
+  },
 };
 
 module.exports = Mutation;
