@@ -28,17 +28,36 @@ const CREATE_ITEM_MUTATION = gql`
 
 class CreateItem extends Component {
   state = {
-    title: 'Pony',
-    description: 'A very small pony',
-    image: 'pony.jpg',
-    largeImage: 'large-pony.jpg',
-    price: 30000,
+    title: '',
+    description: '',
+    image: '',
+    largeImage: '',
+    price: 0,
   };
 
   handleChange = e => {
     const { name, type, value } = e.target;
     const val = type === 'number' ? parseFloat(value) : value;
     this.setState({ [name]: val });
+  };
+
+  uploadFile = async e => {
+    console.log('Uploading file');
+    const files = e.target.files;
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset', 'sickfitz');
+
+    const res = await fetch('https://api.cloudinary.com/v1_1/deadrobot/image/upload', {
+      method: 'POST',
+      body: data,
+    });
+    const file = await res.json();
+    console.log(file);
+    this.setState({
+      image: file.secure_url,
+      largeImage: file.eager[0].secure_url,
+    });
   };
 
   render() {
@@ -59,6 +78,20 @@ class CreateItem extends Component {
           >
             <Error error={error} />
             <fieldset disabled={loading} aria-busy={loading}>
+              <label htmlFor="file">
+                Image
+                <input
+                  type="file"
+                  name="file"
+                  id="file"
+                  placeholder="Upload an image"
+                  required
+                  onChange={this.uploadFile}
+                />
+                {this.state.image && (
+                  <img width="200" src={this.state.image} alt="Upload preview" />
+                )}
+              </label>
               <label htmlFor="title">
                 Title
                 <input
