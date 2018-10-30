@@ -29,7 +29,12 @@ class DeleteItem extends Component {
   render() {
     const { buttonText, id } = this.props;
     return (
-      <Mutation mutation={DELETE_ITEM_MUTATION} variables={{ id }} update={this.update}>
+      <Mutation
+        mutation={DELETE_ITEM_MUTATION}
+        variables={{ id }}
+        update={this.update}
+        refetchQueries={[{ query: ALL_ITEMS_QUERY }]}
+      >
         {(deleteItem, { error }) => (
           <button
             onClick={() => {
