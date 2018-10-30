@@ -32,5 +32,8 @@
     "presets": [
       "env"
     ]
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^4.6.5"
   }
 }
