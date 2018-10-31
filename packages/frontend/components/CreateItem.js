@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 import Form from './styles/Form';
 import formatMoney from '../lib/formatMoney';
 import Error from './ErrorMessage';
+import { ALL_ITEMS_QUERY } from './Items';
 
 const CREATE_ITEM_MUTATION = gql`
   mutation CREATE_ITEM_MUTATION(
@@ -42,7 +43,6 @@ class CreateItem extends Component {
   };
 
   uploadFile = async e => {
-    console.log('Uploading file');
     const files = e.target.files;
     const data = new FormData();
     data.append('file', files[0]);
@@ -53,16 +53,24 @@ class CreateItem extends Component {
       body: data,
     });
     const file = await res.json();
-    console.log(file);
     this.setState({
       image: file.secure_url,
       largeImage: file.eager[0].secure_url,
     });
   };
 
+  update = (cache, payload) => {
+    const data = cache.readQuery({ query: ALL_ITEMS_QUERY });
+    const items = data.items.push(payload.data.createItem.id);
+    cache.writeQuery({
+      query: ALL_ITEMS_QUERY,
+      data: { items },
+    });
+  };
+
   render() {
     return (
-      <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
+      <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state} update={this.update}>
         {(createItem, { loading, error }) => (
           <Form
             onSubmit={async e => {
