@@ -23,7 +23,7 @@ const Query = {
     // check user has permissions to query all the users
     hasPermission(ctx.request.user, ['ADMIN', 'PERMISSIONUPDATE']);
     // query all the users
-    return ctx.db.users({}, info);
+    return ctx.db.query.users({}, info);
   },
 };
 
