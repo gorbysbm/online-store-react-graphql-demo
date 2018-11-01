@@ -11,7 +11,7 @@ import calcTotalPrice from '../lib/calcTotalPrice';
 import formatMoney from '../lib/formatMoney';
 
 const LOCAL_STATE_QUERY = gql`
-  query {
+  query LOCAL_STATE_QUERY {
     cartOpen @client
   }
 `;
