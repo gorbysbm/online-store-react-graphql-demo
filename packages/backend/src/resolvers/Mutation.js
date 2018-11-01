@@ -216,6 +216,22 @@ const Mutation = {
       info
     );
   },
+  async removeFromCart(parent, args, ctx, info) {
+    const { userId } = ctx.request;
+    if (!userId) throw new Error(`You must be signed in to do that`);
+    // find cart item
+    const cartItem = await ctx.db.query.cartItem(
+      {
+        where: { id: args.id },
+      },
+      `{id, user {id}}`
+    );
+    if (!cartItem) throw new Error(`No cart item found`);
+    // check they own that cart item
+    if (cartItem.user.id !== userId) throw new Error(`Cheating huhhh`);
+    // delete cart item
+    return await ctx.db.mutation.deleteCartItem({ where: { id: args.id } }, info);
+  },
 };
 
 module.exports = Mutation;
