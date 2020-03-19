@@ -1,0 +1,11 @@
+{
+  "baseUrl": "http://localhost:7777",
+  "defaultCommandTimeout": 7000,
+  "requestTimeout": 12000,
+  "viewportWidth": 1000,
+  "viewportHeight": 800,
+  "blacklistHosts": [
+    "*intercomcdn*"
+  ],
+  "projectId": "gxf8ak"
+}

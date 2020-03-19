@@ -10,6 +10,7 @@
     "test": "NODE_ENV=test jest --watch",
     "heroku-postbuild": "next build"
   },
+  "proxy": "http://localhost:4444",
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -38,6 +39,7 @@
     "waait": "^1.0.2"
   },
   "devDependencies": {
+    "cypress": "^4.2.0",
     "@types/next": "^7.0.3",
     "@types/nprogress": "^0.0.29",
     "babel-jest": "^23.6.0",
