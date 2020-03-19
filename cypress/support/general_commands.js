@@ -1,6 +1,5 @@
-import { getDateTimeStamp } from "./utils";
 
-export function locate(selector) {
+export function get(selector) {
   return cy.get(selector);
 }
 
@@ -13,6 +12,10 @@ export function clearAndTypeText(selector, text) {
     .get(selector)
     .clear()
     .type(text);
+}
+
+export function click(selector) {
+  return cy.get(selector).click()
 }
 
 export function typeText(selector, text) {

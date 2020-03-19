@@ -20,5 +20,11 @@
       "env"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "cypress": "^4.2.0",
+    "cypress-file-upload": "^3.5.3",
+    "faker": "^4.1.0",
+    "moment-timezone": "^0.5.27",
+    "whatwg-fetch": "^3.0.0"
+  }
 }

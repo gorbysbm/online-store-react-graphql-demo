@@ -5,10 +5,13 @@ import Signout from './Signout';
 import { Mutation } from 'react-apollo';
 import { TOGGLE_CART_MUTATION } from './Cart';
 import CartCount from './CartCount';
+import Test from 'react-test-attributes';
+import React from 'react';
 
 const Nav = () => (
   <User>
     {({ data: { me } }) => (
+      <Test id="navbar">
       <NavStyles>
         <Link href="/items">
           <a>Shop</a>
@@ -44,6 +47,7 @@ const Nav = () => (
           </Link>
         )}
       </NavStyles>
+      </Test>
     )}
   </User>
 );
