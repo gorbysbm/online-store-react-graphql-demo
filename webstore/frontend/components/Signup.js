@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
 import { CURRENT_USER_QUERY } from './User';
+import Test from 'react-test-attributes';
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION($email: String!, $name: String!, $password: String!) {
@@ -35,6 +36,7 @@ class Signup extends Component {
       >
         {(signup, { error, loading }) => {
           return (
+            <Test id="signup-form">
             <Form
               method="post"
               onSubmit={async e => {
@@ -79,6 +81,7 @@ class Signup extends Component {
                 <button type="submit">Sign Up!</button>
               </fieldset>
             </Form>
+              </Test>
           );
         }}
       </Mutation>

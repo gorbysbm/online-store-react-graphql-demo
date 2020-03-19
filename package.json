@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "run servers",
   "scripts": {
-    "backend": "cd webstore/backend && npm start",
-    "frontend": "cd webstore/frontend && npm run dev",
+    "backend": "cd webstore/backend && npm install && npm start",
+    "frontend": "cd webstore/frontend && npm install && npm run dev",
     "demo": "concurrently \"npm run frontend\" \"npm run backend\""
   },
   "dependencies": {

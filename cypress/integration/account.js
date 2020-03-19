@@ -5,7 +5,7 @@ beforeEach(() => {
   )
 })
 
-it('adds an item 1', () => {
+it('allows the user to create a new account', () => {
   cy.get('.todo-list li').its('length').then((size) => {
     cy.get('.new-todo').type('new todo{enter}')
     cy.get('.todo-list li')
@@ -14,13 +14,3 @@ it('adds an item 1', () => {
   });
 })
 
-it('adds an item 2', () => {
-  cy.get('.todo-list li').its('length').then((size) => {
-    cy.get('.new-todo').type('new todo{enter}')
-    cy.get('.todo-list li')
-        .should('have.length', size+1)
-        .contains('new todo')
-  });
-
-
-})
