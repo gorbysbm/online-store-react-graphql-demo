@@ -85,12 +85,12 @@ const Mutation = {
     // check if user with email
     const user = await ctx.db.query.user({ where: { email } });
     if (!user) {
-      throw new Error(`No such user found for ${email}`);
+      throw new Error(`Invalid Username or Password. You used email: ${email}`);
     }
     //check if password correct
     const valid = await bcrypt.compare(password, user.password);
     if (!valid) {
-      throw new Error(`Invalid Password`);
+      throw new Error(`Invalid Username or Password`);
     }
     // generate jwt token
     const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);

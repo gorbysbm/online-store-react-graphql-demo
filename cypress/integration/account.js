@@ -7,13 +7,26 @@ beforeEach(() => {
   )
 })
 
-it('allows the user to create a new account', () => {
+it('allows an existing user to login to their account using correct credentials', () => {
   let username = "samsafyan@automation.com"
   let password = "test1234"
+
   auto.visit('/'+"signup")
   login(username, password)
   verifyLoggedIn()
 })
+
+
+it('prevents an existing user from logging in when using an incorrect password', () => {
+  let username = "samsafyan@automation.com"
+  let password = "THIS_WILL_FAIL"
+  let errorMsg = "Invalid Username or Password"
+
+  auto.visit('/'+"signup")
+  login(username, password)
+  verifyErrorDisplayed(errorMsg)
+})
+
 
 function login(username, password){
   let email = '[data-testid="signin-form"] input[type="email"]'
@@ -24,6 +37,11 @@ function login(username, password){
   auto.click(submit)
 }
 
+/************ Functions ************/
 function verifyLoggedIn() {
   auto.get('[data-testid="navbar"] button').contains("Sign Out")
+}
+
+function verifyErrorDisplayed(text){
+  auto.get('[data-test="graphql-error"]').contains(text)
 }
