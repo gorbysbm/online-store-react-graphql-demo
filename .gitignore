@@ -72,3 +72,10 @@ typings/
 
 # Serverless directories
 .serverless
+
+#IDE
+.idea
+
+#Cypress
+cypress/videos
+cypress/screenshots
