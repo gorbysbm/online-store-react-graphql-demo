@@ -59,8 +59,8 @@ export function clearSession() {
   }
 }
 
-export function setCookie(env, jwt) {
-  cy.setCookie(env, jwt);
+export function setCookie(name, value) {
+  cy.setCookie(name, value);
 }
 
 export function setLocalStorage(env, jwt) {

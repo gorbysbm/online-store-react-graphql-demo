@@ -3,6 +3,7 @@ import formatMoney from '../lib/formatMoney';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
 import RemoveFromCart from './RemoveFromCart';
+import Test from 'react-test-attributes'
 
 const CartStyledItem = styled.li`
   padding: 1rem 0;
@@ -30,16 +31,22 @@ const CartItem = ({ cartItem }) => {
   return (
     <CartStyledItem>
       <img width="100px" src={cartItem.item.image} alt={cartItem.item.title} />
+      <Test id={`cart-item-details-${cartItem.item.title}`}>
       <div className="cart-item-details">
-        <h3>{cartItem.item.title}</h3>
-        <p>
-          {formatMoney(cartItem.item.price * cartItem.quantity)}
-          {` - `}
-          <em>
+        <Test id={"item-title"}>
+          <div>
+          <h3>{cartItem.item.title}</h3>
+          </div>
+        </Test>
+        <Test id="item-price-quantity">
+          <p>
             {cartItem.quantity} &times; {formatMoney(cartItem.item.price)}
-          </em>
-        </p>
+            {` : `}
+            {formatMoney(cartItem.item.price * cartItem.quantity)}
+          </p>
+        </Test>
       </div>
+      </Test>
       <RemoveFromCart id={cartItem.id} />
     </CartStyledItem>
   );

@@ -2,6 +2,6 @@
   "env": {
     "name": "staging",
     "webApp": "https://our-staging-url/web",
-    "graphql": "https://our-staging-url/graphql"
+    "api": "https://our-staging-url/graphql"
   }
 }

@@ -4,6 +4,7 @@
   "requestTimeout": 12000,
   "viewportWidth": 1000,
   "viewportHeight": 800,
+  "watchForFileChanges" :	true,
   "blacklistHosts": [
     "*intercomcdn*"
   ],

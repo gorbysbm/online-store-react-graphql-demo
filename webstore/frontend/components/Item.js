@@ -7,6 +7,7 @@ import PriceTag from './styles/PriceTag';
 import DeleteItem from './DeleteItem';
 import formatMoney from '../lib/formatMoney';
 import AddToCart from './AddToCart';
+import Test from 'react-test-attributes';
 
 export default class Item extends Component {
   static propTypes = {
@@ -23,8 +24,10 @@ export default class Item extends Component {
   render() {
     const { item } = this.props;
     return (
+      <Test id={item.title}>
       <ItemStyles>
         {item.image && <img src={item.image} alt={item.title} />}
+
         <Title>
           <Link
             href={{
@@ -35,9 +38,11 @@ export default class Item extends Component {
             <a>{item.title}</a>
           </Link>
         </Title>
+
         <PriceTag>{formatMoney(item.price)}</PriceTag>
         <p>{item.description}</p>
         <div className="buttonList">
+
           <Link
             href={{
               pathname: 'update',
@@ -46,10 +51,12 @@ export default class Item extends Component {
           >
             <a>Edit ✏️</a>
           </Link>
+
           <AddToCart id={item.id} />
           <DeleteItem buttonText="Delete Item?" id={item.id} />
         </div>
       </ItemStyles>
+      </Test>
     );
   }
 }

@@ -30,12 +30,14 @@ const Nav = () => (
             <Signout />
             <Mutation mutation={TOGGLE_CART_MUTATION}>
               {toggleCart => (
+                <Test id ="toggleCart">
                 <button onClick={toggleCart}>
                   My Cart{' '}
                   <CartCount
                     count={me.cart.reduce((tally, cartItem) => tally + cartItem.quantity, 0)}
                   />
                 </button>
+                </Test>
               )}
             </Mutation>
           </>

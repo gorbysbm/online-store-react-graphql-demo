@@ -1,7 +1,7 @@
 {
   "env": {
     "name": "localhost",
-    "webApp": "http://localhost:1234",
-    "graphql": "http://localhost:3000"
+    "webApp": "http://localhost:7777",
+    "api": "http://localhost:4444/graphql"
   }
 }

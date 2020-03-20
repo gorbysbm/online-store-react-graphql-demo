@@ -24,6 +24,7 @@ server.express.use(async (req, res, next) => {
 
 server.start(
   {
+    endpoint: "/graphql",
     cors: {
       credentials: true,
       origin: process.env.FRONTEND_URL,

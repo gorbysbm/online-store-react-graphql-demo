@@ -35,6 +35,7 @@ const Cart = () => {
       {({ user, toggleCart, localState }) => {
         const me = user.data.me;
         if (!me) return null;
+        {me.cart.total = 0}
         return (
           <CartStyles open={localState.data.cartOpen}>
             <header>
@@ -46,8 +47,11 @@ const Cart = () => {
                 's Cart
               </Supreme>
               <p>
-                You have {me.cart.length} item
-                {me.cart.length === 1 ? '' : 's'} in your cart
+                {me.cart.forEach(cartItem => {
+                  {me.cart.total+=cartItem.quantity}
+                })}
+                You have {me.cart.total} item
+                {me.cart.total === 1 ? '' : 's'} in your cart
               </p>
             </header>
             <ul>

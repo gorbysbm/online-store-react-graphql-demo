@@ -8,7 +8,7 @@ beforeEach(() => {
 })
 
 it('allows an existing user to login to their account using correct credentials', () => {
-  let username = "samsafyan@automation.com"
+  let username = "samS@automation.com"
   let password = "test1234"
 
   auto.visit('/'+"signup")
@@ -18,7 +18,7 @@ it('allows an existing user to login to their account using correct credentials'
 
 
 it('prevents an existing user from logging in when using an incorrect password', () => {
-  let username = "samsafyan@automation.com"
+  let username = "samS@automation.com"
   let password = "THIS_WILL_FAIL"
   let errorMsg = "Invalid Username or Password"
 
@@ -27,7 +27,7 @@ it('prevents an existing user from logging in when using an incorrect password',
   verifyErrorDisplayed(errorMsg)
 })
 
-
+/************ Functions ************/
 function login(username, password){
   let email = '[data-testid="signin-form"] input[type="email"]'
   let psw = '[data-testid="signin-form"] input[type="password"]'
@@ -37,7 +37,6 @@ function login(username, password){
   auto.click(submit)
 }
 
-/************ Functions ************/
 function verifyLoggedIn() {
   auto.get('[data-testid="navbar"] button').contains("Sign Out")
 }
