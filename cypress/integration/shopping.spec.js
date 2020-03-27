@@ -1,18 +1,18 @@
 /// <reference types="cypress" />
 import * as auto from '../support/general_commands';
-import { gloves, shoes } from '../constants/items';
+import { getIframeBody } from '../support/general_commands';
+import { mensShoes, womensShoes } from '../constants/items';
 import { generateRandomUser } from '../support/commands';
 
-let expectedTotalItemsInCart
+let expectedTotalItemsInCart = 0
 
 beforeEach(() => {
   cy.server();
-  expectedTotalItemsInCart = 0
   auto.visit('/')
 })
 
-it('allows a newly registered user to add items to cart', () => {
-  let itemsToBuy = [gloves, shoes]
+it('allows a user to add items to cart', () => {
+  let itemsToBuy = [mensShoes, womensShoes]
 
   //Sign up user via the api to speed up tests; we are already verifying the login UI in a separate test
   generateRandomUser()
@@ -30,7 +30,40 @@ it('allows a newly registered user to add items to cart', () => {
 })
 
 
+it('allows the user to proceed to checkout after adding multiple items to their cart', () => {
+  let item = mensShoes
+  let expectedCartTotals = { price:"$13,603.70", items : "17"}
+
+  gotoItemsPage()
+  cy.server()
+
+  //An example of using fixtures to instantly fill up our cart with items -- greatly reducing testcase execution time
+  cy.route("POST", "/graphql","fixture:sampleCart").as("graphql");
+  auto.get(`[data-testid="${item.name}"] button`).contains("Cart").click()
+  cy.waitForApiResponse("@graphql", "ADD_TO_CART_MUTATION")
+
+  openCart()
+  verifyCartContents(expectedCartTotals)
+  clickCheckout()
+  verifyStripeCheckout(expectedCartTotals)
+})
+
+
 /************ Functions ************/
+function verifyCartContents(expectedCartTotals) {
+  auto.verifyElementHasText('[data-testid="total-price"]',expectedCartTotals.price)
+}
+
+function verifyStripeCheckout(expectedCartTotals) {
+  const {price, items} = expectedCartTotals
+  let iframeStripe = 'iframe[name="stripe_checkout_app"]'
+  getIframeBody(iframeStripe).find('button[type="submit"] .Button-content > span').should('have.text', `Pay ${price}`)
+  getIframeBody(iframeStripe).find('.Header-purchaseDescription').should('have.text', `Order of ${items} items!`)
+}
+
+function clickCheckout(){
+  auto.click('[data-testid="checkout-button"]')
+}
 
 function gotoItemsPage() {
     auto.visit('/'+"items")
@@ -40,8 +73,9 @@ function addItemToCart(item){
     cy.server();
     cy.route("POST", "/graphql").as("graphql");
     auto.get(`[data-testid="${item.name}"] button`).contains("Cart").click()
-    cy.waitForApiResponse("@graphql", "ADD_TO_CART_MUTATION")
-    expectedTotalItemsInCart++
+    cy.waitForApiResponse("@graphql", "ADD_TO_CART_MUTATION").then( res => {
+      expectedTotalItemsInCart++
+    })
   }
 }
 

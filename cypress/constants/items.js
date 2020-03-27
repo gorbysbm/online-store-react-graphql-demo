@@ -1,15 +1,23 @@
-export const gloves = {
-  name: "GGGLOVES",
-  id:"ck83uky8dsdcv0a87gg1t0yr2",
+export const womensShoes = {
+  name: "WomensShoes2",
+  id:"ck896os7oacl90934xczopgfa",
   quantity: 2,
-  price: "$435.43",
-  total: "$870.86"
+  price: "$700.52",
+  total: "$1,401.04"
 };
 
-export const shoes = {
-  name: "shoes",
-  id:"ck83pxe3vrco80a87xd6njy37",
+export const mensShoes = {
+  name: "MensShoes",
+  id:"ck896py6sacox0934lqc8c4bx",
   quantity: 1,
-  price: "$7,897.89",
-  total: "$7,897.89"
+  price: "$620.22",
+  total: "$620.22"
+};
+
+export const watch = {
+  name: "watch",
+  id:"ck89ghqkpb3ng0934l67rzjxk",
+  quantity: 1,
+  price: "$1,000.00",
+  total: "$1,000.00"
 };

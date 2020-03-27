@@ -5,6 +5,9 @@ import styled from 'styled-components';
 import Item from './Item';
 import Pagination from './Pagination';
 import { perPage } from '../config';
+import User from './User';
+import Link from 'next/link';
+import NavStyles from './styles/NavStyles';
 
 const ALL_ITEMS_QUERY = gql`
   query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = ${perPage}) {
@@ -34,7 +37,8 @@ const ItemsList = styled.div`
 class Items extends Component {
   render() {
     return (
-      <Center>
+      <User>{({ data: { me } }) => (
+       <Center>
         <Pagination page={this.props.page} />
         <Query
           // fetchPolicy="network-only"
@@ -55,6 +59,8 @@ class Items extends Component {
         </Query>
         <Pagination page={this.props.page} />
       </Center>
+      )}
+      </User>
     );
   }
 }

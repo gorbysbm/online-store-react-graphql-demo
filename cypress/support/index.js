@@ -19,3 +19,4 @@ import "./fetch_to_xhr";
 
 //Place code that you want to run before the test suite in the before function
 before(function() {});
+

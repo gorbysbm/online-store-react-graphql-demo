@@ -14,14 +14,18 @@ export function clearAndTypeText(selector, text) {
     .type(text);
 }
 
-export function click(selector) {
-  return cy.get(selector).click()
-}
-
 export function typeText(selector, text) {
   return cy
     .get(selector)
     .type(text);
+}
+
+export function verifyElementHasText(selector, text) {
+  return cy.get(selector).should('have.text', text)
+}
+
+export function click(selector) {
+  return cy.get(selector).click()
 }
 
 //use when cypress incorrectly cancels a XHR during a form submit due to default behavior not being prevented in app
@@ -66,3 +70,20 @@ export function setCookie(name, value) {
 export function setLocalStorage(env, jwt) {
   localStorage.setItem(env, JSON.stringify(jwt));
 }
+
+//Workaround for getting elements that cypress can't select because they are inside and iframe
+export function getIframeBody (locator) {
+  // get the iframe > document > body
+  // and retry until the body element is not empty
+  return cy
+    .get(locator)
+    .its('0.contentDocument.body').should('not.be.empty')
+    // wraps "body" DOM element to allow
+    // chaining more Cypress commands, like ".find(...)"
+    // https://on.cypress.io/wrap
+    .then(cy.wrap)
+}
+
+//////////////////Iframe Support ///////////////////////
+
+//////////////////////////////////////////////////////////////////////////

@@ -79,3 +79,5 @@ typings/
 #Cypress
 cypress/videos
 cypress/screenshots
+
+TODOs.txt

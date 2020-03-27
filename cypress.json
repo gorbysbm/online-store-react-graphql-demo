@@ -5,6 +5,7 @@
   "viewportWidth": 1000,
   "viewportHeight": 800,
   "watchForFileChanges" :	true,
+  "chromeWebSecurity": false,
   "blacklistHosts": [
     "*intercomcdn*"
   ],
