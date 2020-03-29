@@ -34,20 +34,16 @@ it('allows the user to proceed to checkout after adding multiple items to their 
   let item = mensShoes
   let expectedCartTotals = { price:"$13,603.70", items : "17"}
 
+  //An example of using fixtures to instantly fill up our cart with items
+  //greatly reducing testcase execution time
+  cy.stubGraphQL('addToCartOperation.json')
   gotoItemsPage()
-  cy.server()
-
-  //An example of using fixtures to instantly fill up our cart with items -- greatly reducing testcase execution time
-  cy.route("POST", "/graphql","fixture:sampleCart").as("graphql");
-  auto.get(`[data-testid="${item.name}"] button`).contains("Cart").click()
-  cy.waitForApiResponse("@graphql", "ADD_TO_CART_MUTATION")
-
+  addItemToCart(mensShoes, false)
   openCart()
   verifyCartContents(expectedCartTotals)
   clickCheckout()
   verifyStripeCheckout(expectedCartTotals)
 })
-
 
 /************ Functions ************/
 function verifyCartContents(expectedCartTotals) {
@@ -68,15 +64,23 @@ function clickCheckout(){
 function gotoItemsPage() {
     auto.visit('/'+"items")
 }
-function addItemToCart(item){
-  for (let i = 0; i < item.quantity; i++) {
-    cy.server();
-    cy.route("POST", "/graphql").as("graphql");
-    auto.get(`[data-testid="${item.name}"] button`).contains("Cart").click()
-    cy.waitForApiResponse("@graphql", "ADD_TO_CART_MUTATION").then( res => {
+function addItemToCart(item, waitForApi = true){
+  if (waitForApi){
+    for (let i = 0; i < item.quantity; i++) {
+      cy.server();
+      cy.route("POST", "/graphql").as("graphql");
+      auto.get(`[data-testid="${item.name}"] button`).contains("Cart").click()
+      cy.waitForApiResponse("@graphql", "ADD_TO_CART_MUTATION").then( res => {
+        expectedTotalItemsInCart++
+      })
+    }
+  } else {
+    for (let i = 0; i < item.quantity; i++) {
+      auto.get(`[data-testid="${item.name}"] button`).contains("Cart").click()
       expectedTotalItemsInCart++
-    })
+    }
   }
+
 }
 
 function verifyCartItemCounterinNav(number){

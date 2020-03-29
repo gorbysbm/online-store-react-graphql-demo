@@ -8,6 +8,7 @@ function fetchToXhr() {
       .then((contents) => polyfill = contents)
     Cypress.on('window:before:load', (win) => {
       delete win.fetch
+      // win.Blob = null; //may be needed for easier stubbing
       win.eval(polyfill)
     })
   })
