@@ -1,19 +1,19 @@
-Sample Cypress automation tests to ensure the quality of our UI and API's
-### `online-store-react-graphql-demo` (An Example Web + GraphQL App) 
+Sample Cypress automation tests to ensure UI and API quality. Tests will be run against an example React + GraphQL App 
+### Start demo app server with : 
 
-Start demo server with :`npm run demo`
+`npm run demo`
 
 
-### Running the Tests via the GUI:
+### Running the Cypress Tests via the GUI:
 
-* navigate to the root project directory and run this command while specifying the environment for your `configFile` e.g.:
+*  run this command while specifying the environment for your `configFile` e.g.:
 ```
         npx cypress open --env configFile=localhost
 ```
 
-### Running the Tests via the command line:
+### Running the Cypress Tests via the command line:
 
-* navigate to the root project directory and run this command while specifying the environment for your `configFile` e.g.:
+* run this command while specifying the environment for your `configFile` e.g.:
 ```
         npx cypress run --env configFile=localhost
 ```
@@ -33,3 +33,7 @@ npx cypress@<4.0.1> open  // run a specific version
 ## Cypress Dashboard
 
 You can also see the results of the  CI runs in the [Cypress Dashboard](https://dashboard.cypress.io/projects/gxf8ak/runs)
+
+
+## Known Cypress Limitations
+[Cypress GraphQL mocking issues](https://github.com/cypress-io/cypress-documentation/issues/122) 

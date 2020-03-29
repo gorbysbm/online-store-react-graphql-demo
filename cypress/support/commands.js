@@ -79,6 +79,26 @@ Cypress.Commands.add("signUpUserApi", (email, name, password) => {
 
 /************ Utility Functions for APIs************/
 
+//Use to workaround cypress' limitation of stubbing graphql calls
+//since all calls are made to the same endpoint
+//You define the responses for *every* graphql operation involved in the graphQlFixture file
+Cypress.Commands.add('stubGraphQL', (graphQlFixture) => {
+  cy.fixture(graphQlFixture).then((mockedData) => {
+    cy.on('window:before:load', (win) => {
+      function fetch(path, { body }) {
+        const { operationName } = JSON.parse(body)
+        return responseStub(mockedData[operationName])
+      }
+      cy.stub(win, 'fetch', fetch).withArgs("/graphql").as('graphql');
+    });
+  })
+})
+
+const responseStub = result => Promise.resolve({
+  json: () => Promise.resolve(result),
+  text: () => Promise.resolve(JSON.stringify(result)),
+  ok: true,
+})
 
 
 Cypress.Commands.add("waitForApiResponse", (alias, operationName) => {

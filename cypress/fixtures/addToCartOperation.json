@@ -1,0 +1,8 @@
+{
+  "ADD_TO_CART_MUTATION": {
+    "data":{"addToCart":{"id":"ck89gl45psely0981b2bvk6q5","quantity":8,"__typename":"CartItem"}}
+  },
+  "CURRENT_USER_QUERY" : {
+    "data":{"me":{"id":"ck896k87jac8w09343gs9bl5h","email":"sams@automation.com","name":"!!Sam's Mock","permissions":["USER"],"cart":[{"id":"ck89gebgvse9w0981bhh4a147","quantity":5,"item":{"id":"ck896py6sacox0934lqc8c4bx","price":62022,"image":"https://res.cloudinary.com/deadrobot/image/upload/v1585253000/sickfitz/ecgqu4i1wgcj41pdlbty.jpg","title":"MensShoes","description":"Men's Shoes","__typename":"Item"},"__typename":"CartItem"},{"id":"ck89gec6mb3ei0934lmyxne52","quantity":5,"item":{"id":"ck896os7oacl90934xczopgfa","price":70052,"image":"https://res.cloudinary.com/deadrobot/image/upload/v1585252932/sickfitz/i7ac6fqhsebxpmnyd2ui.jpg","title":"WomensShoes2","description":"Women's Shoes","__typename":"Item"},"__typename":"CartItem"},{"id":"ck89gl45psely0981b2bvk6q5","quantity":7,"item":{"id":"ck89ghqkpb3ng0934l67rzjxk","price":100000,"image":"https://res.cloudinary.com/deadrobot/image/upload/v1585269417/sickfitz/eecjz883y7ucshlwvsbw.jpg","title":"watch","description":"Fancy Watch","__typename":"Item"},"__typename":"CartItem"}],"__typename":"User"}}
+  }
+}
