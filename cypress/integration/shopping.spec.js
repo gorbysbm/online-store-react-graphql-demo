@@ -31,7 +31,6 @@ it('allows a user to add items to cart', () => {
 
 
 it('allows the user to proceed to checkout after adding multiple items to their cart', () => {
-  let item = mensShoes
   let expectedCartTotals = { price:"$13,603.70", items : "17"}
 
   //An example of using fixtures to instantly fill up our cart with items

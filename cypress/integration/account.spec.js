@@ -1,29 +1,26 @@
 /// <reference types="cypress" />
-import * as auto from "../support/general_commands";
+import * as auto from '../support/general_commands';
+import { invalidCredentialsShopper, regularShopper } from '../constants/users';
 
 
 beforeEach(() => {
-  auto.visit('/',
-  )
+  auto.visit('/')
 })
 
 it('allows an existing user to login to their account using correct credentials', () => {
-  let username = "samS@automation.com"
-  let password = "test1234"
+  let user = regularShopper
 
   auto.visit('/'+"signup")
-  login(username, password)
+  login(user.email, user.password)
   verifyLoggedIn()
 })
 
-
 it('prevents an existing user from logging in when using an incorrect password', () => {
-  let username = "samS@automation.com"
-  let password = "THIS_WILL_FAIL"
+  let user = invalidCredentialsShopper
   let errorMsg = "Invalid Username or Password"
 
   auto.visit('/'+"signup")
-  login(username, password)
+  login(user.validEmail, user.invalidPassword)
   verifyErrorDisplayed(errorMsg)
 })
 

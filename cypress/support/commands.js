@@ -1,6 +1,6 @@
 import { getDateTimeStamp } from './utils';
 
-Cypress.Commands.add("getCurrentUserApi", () => {
+Cypress.Commands.add("getCurrentUserApi", (failOnApiError = true) => {
   let promiseRes;
   return cy
     .request({
@@ -13,14 +13,15 @@ Cypress.Commands.add("getCurrentUserApi", () => {
     })
     .then(res => {
       promiseRes = res;
-      verifyNoErrorsInApiResponse(res);
+      if (failOnApiError)
+        verifyNoErrorsInApiResponse(res);
     })
     .then(() => Promise.resolve(promiseRes));
 });
 
 
 
-Cypress.Commands.add("loginApi", (email, password) => {
+Cypress.Commands.add("loginApi", (email, password, failOnApiError = true) => {
   let promiseRes;
   return cy
     .request({
@@ -39,7 +40,8 @@ Cypress.Commands.add("loginApi", (email, password) => {
     })
     .then(res => {
       promiseRes = res;
-      verifyNoErrorsInApiResponse(res);
+      if (failOnApiError)
+        verifyNoErrorsInApiResponse(res);
     })
     .then(() => Promise.resolve(promiseRes));
 });
@@ -51,7 +53,7 @@ export function generateRandomUser() {
   cy.signUpUserApi(username, name,  password)
 }
 
-Cypress.Commands.add("signUpUserApi", (email, name, password) => {
+Cypress.Commands.add("signUpUserApi", (email, name, password, failOnApiError = true) => {
   let promiseRes;
   return cy
     .request({
@@ -71,7 +73,8 @@ Cypress.Commands.add("signUpUserApi", (email, name, password) => {
     })
     .then(res => {
       promiseRes = res;
-      verifyNoErrorsInApiResponse(res);
+      if (failOnApiError)
+        verifyNoErrorsInApiResponse(res);
     })
     .then(() => Promise.resolve(promiseRes));
 });
