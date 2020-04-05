@@ -17,5 +17,6 @@ export const invalidCredentialsShopper = {
   id:"",
   validEmail: "sams@automation.com",
   invalidEmail: "samsNonExistentEmail@automation.com",
-  invalidPassword: "test1234FAIL"
+  invalidPassword: "test1234FAIL",
+  validPassword: "test1234"
 };

@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
-import * as auto from '../support/general_commands';
-import { apiShopper } from '../constants/users';
+import { apiShopper, invalidCredentialsShopper } from '../constants/users';
 
 it(' verify api response from a valid login', () => {
   let {name, id, email, password} = apiShopper
@@ -18,22 +17,18 @@ it(' verify api response from a valid login', () => {
     })
 })
 
+it(' verify api response from an invalid email login', () => {
+  let {invalidEmail, validPassword} = invalidCredentialsShopper
 
+  cy.loginApi(invalidEmail, validPassword, false)
+    .then(response => {
+      expect(response.status).to.eq(200);
+      expect(response.headers["content-type"]).to.eq("application/json");
+      expect(response.headers["set-cookie"]).to.not.exist
+      expect(response.body).to.not.be.null;
+      expect(response.body.errors).to.have.length(1)
+      expect(response.body.errors[0].message).to.equal(`Invalid Username or Password. You used email: ${invalidEmail}`)
+    })
+})
 
 /************ Functions ************/
-function login(username, password){
-  let email = '[data-testid="signin-form"] input[type="email"]'
-  let psw = '[data-testid="signin-form"] input[type="password"]'
-  let submit = '[data-testid="signin-form"] button[type="submit"]'
-  auto.clearAndTypeText(email,username)
-  auto.clearAndTypeText(psw, password)
-  auto.click(submit)
-}
-
-function verifyLoggedIn() {
-  auto.get('[data-testid="navbar"] button').contains("Sign Out")
-}
-
-function verifyErrorDisplayed(text){
-  auto.get('[data-test="graphql-error"]').contains(text)
-}
