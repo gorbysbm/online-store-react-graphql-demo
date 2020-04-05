@@ -6,6 +6,9 @@ Cypress.Commands.add("getCurrentUserApi", (failOnApiError = true) => {
     .request({
       url: Cypress.env("api"),
       method: "POST",
+      headers: {
+        'content-type': 'application/json'
+      },
       body: {
         query:`query CURRENT_USER_QUERY {   me {     id     email     name     permissions     cart {
                id       quantity       item {         id         price         image         title  description  } } } } `
@@ -27,6 +30,9 @@ Cypress.Commands.add("loginApi", (email, password, failOnApiError = true) => {
     .request({
       url: Cypress.env("api"),
       method: "POST",
+      headers: {
+        'content-type': 'application/json'
+      },
       body: {
         query: `mutation SIGNIN_MUTATION($email: String!, $password: String!)
         {  signin(email: $email, password: $password) {    id    email    name    __typename  }}`,
@@ -52,6 +58,9 @@ Cypress.Commands.add("signUpUserApi", (email, name, password, failOnApiError = t
     .request({
       url: Cypress.env("api"),
       method: "POST",
+      headers: {
+        'content-type': 'application/json'
+      },
       body: {
         operationName: "SIGNUP_MUTATION",
         query: `mutation SIGNUP_MUTATION($email: String!, $name: String!, $password: String!) {
@@ -79,6 +88,9 @@ Cypress.Commands.add("addItemToCart", (item, failOnApiError = true) => {
     .request({
       url: Cypress.env("api"),
       method: "POST",
+      headers: {
+        'content-type': 'application/json'
+      },
       body: {
         operationName: "ADD_TO_CART_MUTATION",
         query: `mutation ADD_TO_CART_MUTATION($id: ID!)

@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 import { apiShopper, invalidCredentialsShopper } from '../constants/users';
 import { watch } from '../constants/items';
-import { restoreCookies, restoreSession, saveSession } from '../support/general_commands';
+import { clearSession, restoreCookies, restoreSession, saveSession } from '../support/general_commands';
 
 before(() => {
   let {email, password} = apiShopper
@@ -9,6 +9,7 @@ before(() => {
   cy.loginApi(email, password).then(res => {
     //save a logged in session to be used for later tests
     saveSession()
+    clearSession()
   })
 })
 
@@ -43,7 +44,7 @@ it(' verify api response from an invalid email login', () => {
     })
 })
 
-it(' verify logged in user can add item to cart', () => {
+it(' verify api response from logged in user adding item to cart', () => {
   let item = watch
 
   restoreSession()
@@ -54,7 +55,5 @@ it(' verify logged in user can add item to cart', () => {
     expect(response.body.data.addToCart.id).to.eq(item.dbid);
   })
 })
-
-
 
 /************ Functions ************/
