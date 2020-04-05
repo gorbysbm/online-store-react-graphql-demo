@@ -46,13 +46,6 @@ Cypress.Commands.add("loginApi", (email, password, failOnApiError = true) => {
     .then(() => Promise.resolve(promiseRes));
 });
 
-export function generateRandomUser() {
-  let username = `samS${getDateTimeStamp("MMDDhhmmss")}@automation.com`
-  let name = "Sam"
-  let password = "test1234"
-  cy.signUpUserApi(username, name,  password)
-}
-
 Cypress.Commands.add("signUpUserApi", (email, name, password, failOnApiError = true) => {
   let promiseRes;
   return cy
@@ -78,6 +71,39 @@ Cypress.Commands.add("signUpUserApi", (email, name, password, failOnApiError = t
     })
     .then(() => Promise.resolve(promiseRes));
 });
+
+Cypress.Commands.add("addItemToCart", (item, failOnApiError = true) => {
+  let promiseRes;
+  let {id} = item
+  return cy
+    .request({
+      url: Cypress.env("api"),
+      method: "POST",
+      body: {
+        operationName: "ADD_TO_CART_MUTATION",
+        query: `mutation ADD_TO_CART_MUTATION($id: ID!)
+        {  addToCart(id: $id) {    id    quantity    __typename  }}`,
+        variables:
+          {
+            id: id,
+          }
+      },
+    })
+    .then(res => {
+      promiseRes = res;
+      if (failOnApiError)
+        verifyNoErrorsInApiResponse(res);
+    })
+    .then(() => Promise.resolve(promiseRes));
+});
+
+
+export function generateRandomUser() {
+  let username = `samS${getDateTimeStamp("MMDDhhmmss")}@automation.com`
+  let name = "Sam"
+  let password = "test1234"
+  cy.signUpUserApi(username, name,  password)
+}
 
 
 /************ Utility Functions for APIs************/

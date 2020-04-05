@@ -51,6 +51,38 @@ export function uploadFile(fileName, selector, mimeType) {
   });
 }
 
+////////////////////Storage and Cookies Related///////////////////////////
+let LOCAL_STORAGE_MEMORY = {};
+let COOKIE_MEMORY = {};
+
+export function saveSession() {
+  Object.keys(localStorage).forEach(key => {
+    LOCAL_STORAGE_MEMORY[key] = localStorage[key];
+  });
+  cy.getCookies().then((cookies) => {
+    cookies.forEach(cookie => {
+      COOKIE_MEMORY[cookie.name] = cookie
+    })
+  })
+}
+
+export function restoreSession() {
+  restoreLocalStorage()
+  restoreCookies()
+}
+
+export function restoreLocalStorage(){
+  Object.keys(LOCAL_STORAGE_MEMORY).forEach(key => {
+    setLocalStorage(key, LOCAL_STORAGE_MEMORY[key]);
+  });
+}
+
+export function restoreCookies() {
+  Object.keys(COOKIE_MEMORY).forEach(key => {
+    setCookie(key, COOKIE_MEMORY[key].value);
+  });
+};
+
 export function clearSession() {
   try {
     cy.clearLocalStorage();
@@ -67,10 +99,11 @@ export function setCookie(name, value) {
   cy.setCookie(name, value);
 }
 
-export function setLocalStorage(env, jwt) {
-  localStorage.setItem(env, JSON.stringify(jwt));
+export function setLocalStorage(name, value) {
+  localStorage.setItem(name, value);
 }
 
+//////////////////Iframe Support ///////////////////////
 //Workaround for getting elements that cypress can't select because they are inside and iframe
 export function getIframeBody (locator) {
   // get the iframe > document > body
@@ -84,6 +117,3 @@ export function getIframeBody (locator) {
     .then(cy.wrap)
 }
 
-//////////////////Iframe Support ///////////////////////
-
-//////////////////////////////////////////////////////////////////////////
